@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Koneenrikkoja">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tulostusoperaattori</title>
+<script>navigator.serviceWorker.register("service-worker.js")</script> 
+<link rel="manifest" href="manifest.json" />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="w3-container">
+    <header>
+      <h2>Tulostusoperaattori v0.2</h2>
+    </header>
+  <div id="kokonaistulosteet">tulostetut sivut: </div>
+  <div id="palkka">tienattua rahaa: </div>
+  <div id="tila">tila: </span> </div>
+  <br>
+<div style="width:80%;" class="row">
+  <canvas id="fillingCanvas1" width="90" height="100"></canvas>
+  <canvas id="fillingCanvas2" width="90" height="100"></canvas>
+</div>
+<br>
+<div style="width:80%;" class="row">
+  <canvas id="emptyingCanvas1" width="90" height="100"></canvas>
+  <canvas id="emptyingCanvas2" width="90" height="100"></canvas>
+</div>
+
+<br>
+<button id="startButton">Käynnistä tulostin</button>
+<button id="moveButton">Lisää paperia ja tyhjennä lokerot</button><br>
+<button id="pauseButton">Tupakkatauko</button>
+<button id="lunchButton">Ruokatauko</button>
+<button id="toiletButton">Vessatauko</button>
+<br>
+<br>
+<footer><div>&copy; luddiitti, Pentti Liikanen 2024</div></footer>
+</div>
+</body>
+<script src="koodi.js"></script>
+</html>

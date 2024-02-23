@@ -1,0 +1,55 @@
+canvas {
+    border: 1px solid black; 
+    top: 0;
+    bottom: 0;
+    left: 50;
+    right: 50;
+  }
+
+.row{
+    display: flex;      
+}
+  .w3-container {
+    margin: 0 auto;
+    width: 80%;
+}
+
+button {
+  margin: 1px;
+  border-radius: 4px;
+  background-color: white;
+  border: 2px solid #04AA6D;
+}
+
+button {
+    transition-duration: 0.4s;
+  }
+
+button:focus {
+    color: black;
+}
+
+button:hover {
+    background-color: #04AA6D; /* Green */
+    color: white;
+}
+
+button:active {
+  color: orange;
+}
+  
+h2 {
+    text-align: left;
+}
+
+#tila {
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+footer{ 
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+

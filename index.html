@@ -17,11 +17,14 @@
 <body>
   <div class="w3-container">
     <header>
-      <h2>Tulostusoperaattori v0.2</h2>
+      <h2>Tulostusoperaattori v0.21 </h2>
+      <small>#pientä laittoa, logiikka takkuaa</small><br><br>
     </header>
-  <div id="kokonaistulosteet">tulostetut sivut: </div>
-  <div id="palkka">tienattua rahaa: </div>
-  <div id="tila">tila: </span> </div>
+    <div id="palkkaLuokka">Palkkamuoto: urakka</div>
+    <div id="hinnasto">Hinnasto: ruoka 0,50 mk, tupakki 0,10 mk/kpl</div>
+  <div>Tulostetut sivut: <span id="kokonaistulosteet"></span></div>
+  <div>Tienattua rahaa: <span id="palkka"></span></div>
+  <div>Tila: <span id="tila"></span> </div>
   <br>
 <div style="width:80%;" class="row">
   <canvas id="fillingCanvas1" width="90" height="100"></canvas>
@@ -40,6 +43,10 @@
 <button id="lunchButton">Ruokatauko</button>
 <button id="toiletButton">Vessatauko</button>
 <br>
+<p>Ohje:</p>
+<p>Käynnistä tulostin: aloita työt tai lopeta tauko.</p>
+<p>Tauko: pidä taukoa, jos ehdit, palkka ei juokse.</p>
+<p>Lisää paperia ja tyhjennä lokerot: kun tulostimen ylälokerot on täynnä.</p>
 <br>
 <footer><div>&copy; luddiitti, Pentti Liikanen 2024</div></footer>
 </div>

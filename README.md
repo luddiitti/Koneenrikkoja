@@ -10,7 +10,7 @@ Ei ladattavia ulkopuolisia JS-kirjastoja, vaan ainoastaan ns. Vanilla-JavaScript
 
 Pelin idea juontaa työhön, jota tein joskus ammoisana aikana kauan sitten, mutta jäi vain ajatuksen asteelle.
 
-XAMK:n palisuunnittelulinjan pääsykokeessa nappasin idean papaerille, koska sinne ideoimani aihe ei toiminut.
+XAMK:n palisuunnittelulinjan pääsykokeessa nappasin idean paperille, koska sinne ideoimani aihe ei toiminut.
 
 En kuitenkaan päässyt em. linjalle, mutta jonnekin toisaalle pääsin hieman myöhemmin.
 

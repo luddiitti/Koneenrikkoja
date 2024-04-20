@@ -57,7 +57,7 @@ var tila = null;
 function updateCanvas1() {
   if (isDrawing && fillPercentage1 <= 100) {
     // Clear canvases
-    
+
     //printterin tilan vahvistus
     if (tila === null) {
     document.getElementById("tila").innerHTML = "Painetaan duunia tyrät rytkyen!";
@@ -386,7 +386,7 @@ document.getElementById('moveButton').addEventListener('click', function () {
       document.getElementById("tila").innerHTML = uusiAlku;
       var tilaVari = document.getElementById("tila");
       tilaVari.style.color = "orange";
-    }, 500);
+    }, 2000);
     //tulosteet = tulosteet + 5000;
     //document.getElementById("kokonaistulosteet").innerHTML = "tulostetut sivut: " + tulosteet;
     document.getElementById("palkka").innerHTML = palkka.toFixed(2) + " mk";

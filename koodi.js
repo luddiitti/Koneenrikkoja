@@ -168,8 +168,10 @@ function filling2(fillHeight2) {
   }
 }
 // Start button event listener
+
 document.getElementById('startButton').addEventListener('click', function () {
-  if (isDrawing === false && tila != "Taynna") {
+  if (isDrawing === false) {
+    tila = null;
     console.log(tila);
     isDrawing = true;
     document.getElementById("tila").innerHTML = "Painetaan duunia tyrät rytkyen!";
@@ -343,6 +345,7 @@ function herja(herja1, herja2, tilaVari1, tilaVari2) {
     } else if (tila === "tupakki") {
       x.innerHTML = herjaTupakki2;
       tilaVari.style.color = "red";
+      console.log("vit", tila);
 
     }
     else {

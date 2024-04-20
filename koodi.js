@@ -40,6 +40,7 @@ const herjaTupakki1 = "Ei sulla oo varaa ostaa tupakkia!";
 const herjaTupakki2 = "Tuu tuu tupakilla, röyhyää körssi!";
 const herjaTupakki3 = "Ei taukoja nyt laiskuri, kone käyntiin!";
 const herjaBinit1 = "Tyhjennetään binit ja täytetään paperilokerot!";
+const uusiAlku = "Käynnistä tulostin!";
 const herjaBinit2 = "Ei binit oo vielä täynnä, senkin jannu!";
 const tyoTilaAktiivi = "Painetaan duunia tyrät rytkyen!";
 const binitTaynna = "Binit on täynnä, tartteis poistaa tulosteet!"
@@ -375,6 +376,11 @@ document.getElementById('moveButton').addEventListener('click', function () {
     document.getElementById("tila").innerHTML = "Tyhjennetään binit ja täytetään paperilokerot!";
     var tilaVari = document.getElementById("tila");
     tilaVari.style.color = "orange";
+    setTimeout(function(){
+      document.getElementById("tila").innerHTML = uusiAlku;
+      var tilaVari = document.getElementById("tila");
+      tilaVari.style.color = "orange";
+    }, 2000);
     //tulosteet = tulosteet + 5000;
     //document.getElementById("kokonaistulosteet").innerHTML = "tulostetut sivut: " + tulosteet;
     document.getElementById("palkka").innerHTML = palkka.toFixed(2) + " mk";

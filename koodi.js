@@ -170,7 +170,12 @@ function filling2(fillHeight2) {
 // Start button event listener
 
 document.getElementById('startButton').addEventListener('click', function () {
-  if (isDrawing === false) {
+  
+  if (tila === "Taynna") {
+    herja("Ei voi startata, binit pitäisi tyhjentää!", binitTaynna, "red", "orange");
+  }
+  
+  if (isDrawing === false && tila != "Taynna") {
     tila = null;
     console.log(tila);
     isDrawing = true;
@@ -328,6 +333,12 @@ document.getElementById('toiletButton').addEventListener('click', function () {
 });
 
 function herja(herja1, herja2, tilaVari1, tilaVari2) {
+   if (tila === "Taynna") {
+    let x = document.getElementById("tila");
+    x.innerHTML = "Binit täynnä, ei voi käynnistää!";
+    x.style.color = "orange";
+  }
+
   if (tila != "Taynna") {
   document.getElementById("tila").innerHTML = herja1;
   var tilaVari = document.getElementById("tila");
@@ -342,7 +353,8 @@ function herja(herja1, herja2, tilaVari1, tilaVari2) {
       x.innerHTML = herjaRuoka3;
       tilaVari.style.color = "blue";
 
-    } else if (tila === "tupakki") {
+    }  
+    else if (tila === "tupakki") {
       x.innerHTML = herjaTupakki2;
       tilaVari.style.color = "red";
       console.log("vit", tila);

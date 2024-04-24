@@ -42,11 +42,12 @@ h2 {
     text-align: left;
 }
 
-#tila {
+#tila, #noWrap {
   overflow: hidden; 
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 footer{ 
     text-align: left;
     margin-left: auto;

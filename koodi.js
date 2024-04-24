@@ -410,7 +410,7 @@ document.getElementById('moveButton').addEventListener('click', function () {
 
     //alert("siirto 5000 sivua");
     document.getElementById("tila").innerHTML = "Tyhjennetään binit ja täytetään paperilokerot!";
-    var tilaVari = document.getElementById("tila");
+    let tilaVari = document.getElementById("tila");
     tilaVari.style.color = "orange";
     setTimeout(function(){
       document.getElementById("tila").innerHTML = uusiAlku;
@@ -469,11 +469,14 @@ function tilavalo(tila) {
 
 document.getElementById('lopetaPaiva').addEventListener('click', function () {
 //function lopetaPaiva() {
-  console.log("lopetaPaiva");
+  //alert("lopetaPaiva");
   clearInterval(sekunnitId);
-  if (isDrawing == true) {
+  if (isDrawing == true || tila === "WC" || tila === "ruoka" || tila === "tupakki" || tila === "Taynna") {
     isDrawing = false;
     tila = "stop";
+    document.getElementById("tila").innerHTML = "Työnteko lopetettu!";
+    let tilaVari = document.getElementById("tila");
+    tilaVari.style.color = "black";
     tilavalo(tila);
   }
 });

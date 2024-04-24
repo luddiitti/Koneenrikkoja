@@ -151,6 +151,7 @@ function updateCanvas2() {
       document.getElementById("tila").innerHTML = binitTaynna;
       var tilaVari = document.getElementById("tila");
       tilaVari.style.color = "orange";
+      tilavalo(tila);
     }
     // Schedule next frame
     setTimeout(updateCanvas2, 1800); // 1000ms = 1 second
@@ -177,7 +178,7 @@ document.getElementById('startButton').addEventListener('click', function () {
   
   if (isDrawing === false && tila != "Taynna") {
     tila = null;
-    console.log(tila);
+    tilavalo(tila);
     isDrawing = true;
     document.getElementById("tila").innerHTML = "Painetaan duunia tyrät rytkyen!";
     var tilaVari = document.getElementById("tila");
@@ -212,6 +213,7 @@ document.getElementById('pauseButton').addEventListener('click', function () {
       var tilaVari = document.getElementById("tila");
       tilaVari.style.color = "red";
       tila = "tupakki";
+      tilavalo(tila);
 
 
       //} else {
@@ -262,6 +264,7 @@ document.getElementById('lunchButton').addEventListener('click', function () {
       var tilaVari = document.getElementById("tila");
       tilaVari.style.color = "blue";
       tila = "ruoka";
+      tilavalo(tila);
       //} else {
       //    isDrawing = true;
       //    document.querySelector('#startButton').click();
@@ -304,6 +307,7 @@ document.getElementById('toiletButton').addEventListener('click', function () {
       var tilaVari = document.getElementById("tila");
       tilaVari.style.color = "brown";
       tila = "WC";
+      tilavalo(tila);
     }
 
     if (vessatauko >= 3) {
@@ -421,3 +425,30 @@ function fillFalse() {
   fillPercentage2 = 0;
   //document.querySelector('#startButton').click();
 }
+
+var intervalId; // Global variable to hold the interval ID
+
+//tilavalo
+function tilavalo(tila) {
+  let status = "black";
+ 
+  if (intervalId) {
+    clearInterval(intervalId);
+  }
+
+  if (tila === null) {
+    status = "green";
+  } else if (tila === "WC" || tila === "ruoka" || tila === "tupakki") {
+    status = "orange";
+  } else if (tila === "Taynna") {
+    status = "red";
+  }
+
+  intervalId = setInterval(function() {
+    if (ball.style.backgroundColor === 'black') {
+      ball.style.backgroundColor = status;
+    } else {
+      ball.style.backgroundColor = 'black';
+    }
+  }, 500); // Changes color every 500 milliseconds
+};

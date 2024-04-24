@@ -53,3 +53,14 @@ footer{
     margin-right: auto;
 }
 
+#ball {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;  /* Makes the shape a circle */
+  background-color: black; /* Initial green color */
+  border: 1px solid #000;
+  position: static;
+  margin-left: 25px;
+  transform: translate(-50%, -50%);
+}
+

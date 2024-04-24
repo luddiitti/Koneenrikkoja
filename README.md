@@ -2,7 +2,7 @@
 
 Peli-idea JS-toteutuksella.
 
-Nykyinen versio on 0.23. 24.4.2024
+Nykyinen versio on 0.24. 24.4.2024
 
 PWA-appi, jossa on havainnollistettu visualisointia html-canvasin avulla.
 

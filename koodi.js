@@ -170,6 +170,8 @@ function filling2(fillHeight2) {
 }
 // Start button event listener
 
+var count = 0;
+var sekunnitId; // Global variable to hold the interval ID for secons worked
 document.getElementById('startButton').addEventListener('click', function () {
   
   if (tila === "Taynna") {
@@ -193,6 +195,15 @@ document.getElementById('startButton').addEventListener('click', function () {
     /*if (fill1 === false) {
         updateCanvas1();
     }*/
+    var counterElement = document.getElementById('counter');
+    //var count = 0;  // Start the counter at 0
+    clearInterval(sekunnitId);
+    sekunnitId = setInterval(function() {
+      count++;  // Increment the counter
+      counterElement.textContent = count;  // Update the display
+    
+    }, 1000);  // Set interval to 1 second
+  
     console.log(fillPercentage1, fillPercentage2, fill1, fill2);
   }
 });
@@ -442,6 +453,8 @@ function tilavalo(tila) {
     status = "orange";
   } else if (tila === "Taynna") {
     status = "red";
+  } else if (tila === "stop") {
+    status = "black";
   }
 
   intervalId = setInterval(function() {
@@ -452,3 +465,15 @@ function tilavalo(tila) {
     }
   }, 500); // Changes color every 500 milliseconds
 };
+
+
+document.getElementById('lopetaPaiva').addEventListener('click', function () {
+//function lopetaPaiva() {
+  console.log("lopetaPaiva");
+  clearInterval(sekunnitId);
+  if (isDrawing == true) {
+    isDrawing = false;
+    tila = "stop";
+    tilavalo(tila);
+  }
+});

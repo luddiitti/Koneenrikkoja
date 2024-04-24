@@ -176,8 +176,16 @@ document.getElementById('startButton').addEventListener('click', function () {
   
   if (tila === "Taynna") {
     herja("Ei voi startata, binit pitäisi tyhjentää!", binitTaynna, "red", "orange");
+    tila = "Taynna";
+    tilavalo(tila);
   }
   
+  if (fill1 === true && fill2 === true && tila === "stop") {
+    herja("Ei voi startata, binit pitäisi tyhjentää!", binitTaynna, "red", "orange");
+    tila = "Taynna";
+    tilavalo(tila);
+  }
+
   if (isDrawing === false && tila != "Taynna") {
     tila = null;
     tilavalo(tila);

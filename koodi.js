@@ -60,9 +60,9 @@ function updateCanvas1() {
 
     //printterin tilan vahvistus
     if (tila === null) {
-    document.getElementById("tila").innerHTML = "Painetaan duunia tyrät rytkyen!";
-    var tilaVari = document.getElementById("tila");
-    tilaVari.style.color = "green";
+      document.getElementById("tila").innerHTML = "Painetaan duunia tyrät rytkyen!";
+      var tilaVari = document.getElementById("tila");
+      tilaVari.style.color = "green";
     }
     fillingCtx1.clearRect(0, 0, fillingCanvas1.width, fillingCanvas1.height);
     fillingCtx1.fillStyle = "white";
@@ -173,13 +173,13 @@ function filling2(fillHeight2) {
 var count = 0;
 var sekunnitId; // Global variable to hold the interval ID for secons worked
 document.getElementById('startButton').addEventListener('click', function () {
-  
+
   if (tila === "Taynna") {
     herja("Ei voi startata, binit pitäisi tyhjentää!", binitTaynna, "red", "orange");
     tila = "Taynna";
     tilavalo(tila);
   }
-  
+
   if (fill1 === true && fill2 === true && tila === "stop") {
     herja("Ei voi startata, binit pitäisi tyhjentää!", binitTaynna, "red", "orange");
     tila = "Taynna";
@@ -206,12 +206,12 @@ document.getElementById('startButton').addEventListener('click', function () {
     var counterElement = document.getElementById('counter');
     //var count = 0;  // Start the counter at 0
     clearInterval(sekunnitId);
-    sekunnitId = setInterval(function() {
+    sekunnitId = setInterval(function () {
       count++;  // Increment the counter
       counterElement.textContent = count;  // Update the display
-    
+
     }, 1000);  // Set interval to 1 second
-  
+
     console.log(fillPercentage1, fillPercentage2, fill1, fill2);
   }
 });
@@ -239,7 +239,7 @@ document.getElementById('pauseButton').addEventListener('click', function () {
       //    isDrawing = true;
       //    document.querySelector('#startButton').click();
     }
-    
+
     if (fill1 === true && fill2 === true) {
       //alert("Ei taukoja nyt laiskuri, kone käyntiin!")
       herja(herjaTupakki3, tyoTilaAktiivi, "red", "green");
@@ -356,7 +356,7 @@ document.getElementById('toiletButton').addEventListener('click', function () {
 });
 
 function herja(herja1, herja2, tilaVari1, tilaVari2) {
-   if (tila === "Taynna") {
+  if (tila === "Taynna") {
     let x = document.getElementById("tila");
     x.innerHTML = "Binit täynnä, ei voi käynnistää!";
     x.style.color = "orange";
@@ -369,39 +369,40 @@ function herja(herja1, herja2, tilaVari1, tilaVari2) {
   }
 
   if (tila != "Taynna") {
-  document.getElementById("tila").innerHTML = herja1;
-  var tilaVari = document.getElementById("tila");
-  tilaVari.style.color = tilaVari1;
-  let x = document.getElementById("tila");
-  setTimeout(function () {
-    if (tila === "WC") {
-      x.innerHTML = herjaWC3;
-      tilaVari.style.color = "brown";
+    document.getElementById("tila").innerHTML = herja1;
+    var tilaVari = document.getElementById("tila");
+    tilaVari.style.color = tilaVari1;
+    let x = document.getElementById("tila");
+    setTimeout(function () {
+      if (tila === "WC") {
+        x.innerHTML = herjaWC3;
+        tilaVari.style.color = "brown";
 
-    } else if (tila === "ruoka") {
-      x.innerHTML = herjaRuoka3;
-      tilaVari.style.color = "blue";
+      } else if (tila === "ruoka") {
+        x.innerHTML = herjaRuoka3;
+        tilaVari.style.color = "blue";
 
-    }  
-    else if (tila === "tupakki") {
-      x.innerHTML = herjaTupakki2;
-      tilaVari.style.color = "red";
-      console.log("vit", tila);
+      }
+      else if (tila === "tupakki") {
+        x.innerHTML = herjaTupakki2;
+        tilaVari.style.color = "red";
+        console.log("vit", tila);
 
-    }
-    else {
-      x.innerHTML = herja2;
-      tilaVari.style.color = tilaVari2;
+      }
+      else {
+        x.innerHTML = herja2;
+        tilaVari.style.color = tilaVari2;
 
-    }
+      }
 
-  }, 2000);
-} else {
-  document.getElementById("tila").innerHTML = "Binit täynnä, tyhjennä!";
-  var tilaVari = document.getElementById("tila");
-  tilaVari.style.color = "red";
-  console.log(tila);
-}}
+    }, 2000);
+  } else {
+    document.getElementById("tila").innerHTML = "Binit täynnä, tyhjennä!";
+    var tilaVari = document.getElementById("tila");
+    tilaVari.style.color = "red";
+    console.log(tila);
+  }
+}
 
 
 //move button
@@ -426,7 +427,7 @@ document.getElementById('moveButton').addEventListener('click', function () {
     document.getElementById("tila").innerHTML = "Tyhjennetään binit ja täytetään paperilokerot!";
     let tilaVari = document.getElementById("tila");
     tilaVari.style.color = "orange";
-    setTimeout(function(){
+    setTimeout(function () {
       document.getElementById("tila").innerHTML = uusiAlku;
       var tilaVari = document.getElementById("tila");
       tilaVari.style.color = "orange";
@@ -437,9 +438,14 @@ document.getElementById('moveButton').addEventListener('click', function () {
     console.log(tulosteet);
     fillFalse();
   } else {
-    herja(herjaBinit2, tyoTilaAktiivi, "red", "green");
-    //alert("Ei binit oo vielä täynnä, senkin jannu!")
+    if (tila === "stop") {
+      //do nothing
+    } else {
+      herja(herjaBinit2, tyoTilaAktiivi, "red", "green");
+      //alert("Ei binit oo vielä täynnä, senkin jannu!")
+    }
   }
+
 });
 
 function fillFalse() {
@@ -456,7 +462,7 @@ var intervalId; // Global variable to hold the interval ID
 //tilavalo
 function tilavalo(tila) {
   let status = "black";
- 
+
   if (intervalId) {
     clearInterval(intervalId);
   }
@@ -471,7 +477,7 @@ function tilavalo(tila) {
     status = "black";
   }
 
-  intervalId = setInterval(function() {
+  intervalId = setInterval(function () {
     if (ball.style.backgroundColor === 'black') {
       ball.style.backgroundColor = status;
     } else {
@@ -482,15 +488,15 @@ function tilavalo(tila) {
 
 
 document.getElementById('lopetaPaiva').addEventListener('click', function () {
-//function lopetaPaiva() {
+  //function lopetaPaiva() {
   //alert("lopetaPaiva");
-if (tila === "Taynna" && fill1 != false && fill2 != false) {
-  document.getElementById("tila").innerHTML = "Binit täynnä, tyhjennä ensin!";
-  var tilaVari = document.getElementById("tila");
-  tilaVari.style.color = "red";
-}
+  if (tila === "Taynna" && fill1 != false && fill2 != false) {
+    document.getElementById("tila").innerHTML = "Binit täynnä, tyhjennä ensin!";
+    var tilaVari = document.getElementById("tila");
+    tilaVari.style.color = "red";
+  }
 
-   else if (isDrawing == true || tila === "WC" || tila === "ruoka" || tila === "tupakki" || tila != "Taynna") {
+  else if (isDrawing == true || tila === "WC" || tila === "ruoka" || tila === "tupakki" || tila != "Taynna") {
     clearInterval(sekunnitId);
     isDrawing = false;
     tila = "stop";

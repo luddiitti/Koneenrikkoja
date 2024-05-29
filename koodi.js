@@ -28,6 +28,58 @@ var tulostusSkalaari = 25;
 // Set fill speed (1% per second)
 var fillSpeed = 1;
 
+// Tallentaa muuttujat selaimen välimuistiin
+function tallennaMuuttujat(muuttujat) {
+  localStorage.setItem('muuttujat', JSON.stringify(muuttujat));
+}
+
+// Lataa muuttujat selaimen välimuistista
+function lataaMuuttujat() {
+  const arvo = localStorage.getItem('muuttujat');
+  return arvo ? JSON.parse(arvo) : {};
+}
+
+// Tallennetaan muuttujat ennen kuin sivu suljetaan
+//window.onbeforeunload = function() {
+  window.addEventListener('beforeunload', function() {
+  const muuttujat = {
+      muuttuja1: tulosteet,
+      muuttuja2: ruokatauko,
+      muuttuja3: vessatauko,
+      muuttuja4: tupakkatauko,
+      muuttuja5: palkka,
+      muuttuja6: count
+      //muuttujax: { avain: 'arvo', numero: 456 }
+  };
+
+  // Päivitä tämä vastaamaan tallennettavia arvoja
+  tallennaMuuttujat(muuttujat);
+}); //huom )
+
+// Sivun latautuessa lataa tallennetut muuttujat
+
+window.onload = function() {
+  const ladatutMuuttujat = lataaMuuttujat();
+  console.log('Ladatut muuttujat:', ladatutMuuttujat);
+tulosteet = ladatutMuuttujat.muuttuja1;
+ruokatauko = ladatutMuuttujat.muuttuja2;
+vessatauko = ladatutMuuttujat.muuttuja3;
+tupakkatauko = ladatutMuuttujat.muuttuja4;
+palkka = ladatutMuuttujat.muuttuja5;
+count = ladatutMuuttujat.muuttuja6;
+
+
+document.getElementById('kokonaistulosteet').innerText = ladatutMuuttujat.muuttuja1
+document.getElementById('palkka').innerText = ladatutMuuttujat.muuttuja5
+document.getElementById('counter').innerText = ladatutMuuttujat.muuttuja6
+
+//document.getElementById('jotain').innerText = ladatutMuuttujat.muuttuja4
+//document.getElementBy1Id('jotain').innerText = ladatutMuuttujat.muuttuja5
+//document.getElementById('jotain').innerText = ladatutMuuttujat.muuttuja6
+  // Käytä ladattuja muuttujia tarpeen mukaan
+  // Esimerkiksi: document.getElementById('jotain').innerText = ladatutMuuttujat.muuttuja1;
+};
+
 //tilamuuttujat
 const herjaWC1 = "Ei vielä voi olla hätä!";
 const herjaWC2 = "Tarviitko sakset?";

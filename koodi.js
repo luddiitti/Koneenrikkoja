@@ -40,8 +40,8 @@ function lataaMuuttujat() {
 }
 
 // Tallennetaan muuttujat ennen kuin sivu suljetaan
-//window.onbeforeunload = function() {
-  window.addEventListener('beforeunload', function() {
+window.onbeforeunload = function() {
+  //window.addEventListener('beforeunload', function() {
   const muuttujat = {
       muuttuja1: tulosteet,
       muuttuja2: ruokatauko,
@@ -54,13 +54,15 @@ function lataaMuuttujat() {
 
   // Päivitä tämä vastaamaan tallennettavia arvoja
   tallennaMuuttujat(muuttujat);
-}); //huom )
+};
+//}); //huom )
 
 // Sivun latautuessa lataa tallennetut muuttujat
 
 window.onload = function() {
   const ladatutMuuttujat = lataaMuuttujat();
   console.log('Ladatut muuttujat:', ladatutMuuttujat);
+if (ladatutMuuttujat.muuttuja1 != undefined) {
 tulosteet = ladatutMuuttujat.muuttuja1;
 ruokatauko = ladatutMuuttujat.muuttuja2;
 vessatauko = ladatutMuuttujat.muuttuja3;
@@ -68,11 +70,10 @@ tupakkatauko = ladatutMuuttujat.muuttuja4;
 palkka = ladatutMuuttujat.muuttuja5;
 count = ladatutMuuttujat.muuttuja6;
 
-
-document.getElementById('kokonaistulosteet').innerText = ladatutMuuttujat.muuttuja1
-document.getElementById('palkka').innerText = ladatutMuuttujat.muuttuja5
-document.getElementById('counter').innerText = ladatutMuuttujat.muuttuja6
-
+document.getElementById('kokonaistulosteet').innerText = ladatutMuuttujat.muuttuja1;
+document.getElementById('palkka').innerText = ladatutMuuttujat.muuttuja5;
+document.getElementById('counter').innerText = ladatutMuuttujat.muuttuja6;
+}
 //document.getElementById('jotain').innerText = ladatutMuuttujat.muuttuja4
 //document.getElementBy1Id('jotain').innerText = ladatutMuuttujat.muuttuja5
 //document.getElementById('jotain').innerText = ladatutMuuttujat.muuttuja6

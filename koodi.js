@@ -87,7 +87,7 @@ palkka = ladatutMuuttujat.muuttuja5;
 count = ladatutMuuttujat.muuttuja6;
 
 document.getElementById('kokonaistulosteet').innerText = ladatutMuuttujat.muuttuja1;
-document.getElementById('palkka').innerText = ladatutMuuttujat.muuttuja5;
+document.getElementById('palkka').innerText = ladatutMuuttujat.muuttuja5.toFixed(2) + " mk";
 document.getElementById('counter').innerText = ladatutMuuttujat.muuttuja6;
 }
 //document.getElementById('jotain').innerText = ladatutMuuttujat.muuttuja4

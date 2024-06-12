@@ -28,6 +28,22 @@ var tulostusSkalaari = 25;
 // Set fill speed (1% per second)
 var fillSpeed = 1;
 
+  //tallenna prosessi manuaalisti
+  document.getElementById('tallennaProsessi').addEventListener('click', function () {
+  //window.addEventListener('beforeunload', function() {
+  const muuttujat = {
+      muuttuja1: tulosteet,
+      muuttuja2: ruokatauko,
+      muuttuja3: vessatauko,
+      muuttuja4: tupakkatauko,
+      muuttuja5: palkka,
+      muuttuja6: count
+      //muuttujax: { avain: 'arvo', numero: 456 }
+  };
+  tallennaMuuttujat(muuttujat);
+});
+
+
 // Tallentaa muuttujat selaimen välimuistiin
 function tallennaMuuttujat(muuttujat) {
   localStorage.setItem('muuttujat', JSON.stringify(muuttujat));

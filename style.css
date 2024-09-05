@@ -21,6 +21,10 @@ button {
   border: 2px solid #04AA6D;
 }
 
+#todoDiv, #ohjeDiv {
+  display: none;
+}
+
 button {
     transition-duration: 0.4s;
   }
@@ -29,11 +33,16 @@ button:focus {
     color: black;
 }
 
+@media (pointer: fine) {
+  button {
+    /* Styles for pointing devices */
+  }
+
 button:hover {
     background-color: #04AA6D; /* Green */
     color: white;
+  }
 }
-
 button:active {
   color: orange;
 }
@@ -42,14 +51,26 @@ h2 {
     text-align: left;
 }
 
-#tila {
+#tila, #noWrap {
   overflow: hidden; 
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 footer{ 
     text-align: left;
     margin-left: auto;
     margin-right: auto;
+}
+
+#ball {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;  /* Makes the shape a circle */
+  background-color: black; /* Initial green color */
+  border: 1px solid #000;
+  position: static;
+  margin-left: 25px;
+  transform: translate(-50%, -50%);
 }
 

@@ -21,6 +21,10 @@ button {
   border: 2px solid #04AA6D;
 }
 
+#todoDiv, #ohjeDiv {
+  display: none;
+}
+
 button {
     transition-duration: 0.4s;
   }
@@ -29,11 +33,16 @@ button:focus {
     color: black;
 }
 
+@media (pointer: fine) {
+  button {
+    /* Styles for pointing devices */
+  }
+
 button:hover {
     background-color: #04AA6D; /* Green */
     color: white;
+  }
 }
-
 button:active {
   color: orange;
 }

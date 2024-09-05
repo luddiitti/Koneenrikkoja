@@ -27,6 +27,28 @@ var animationSpeed = 0.1; // Adjust this value to control the animation speed
 var tulostusSkalaari = 25;
 // Set fill speed (1% per second)
 var fillSpeed = 1;
+//tyomuoto
+let palkkamuoto = "urakka";
+
+//ohje
+function ohje() {
+  var x = document.getElementById("ohjeDiv");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+
+//ohje
+function todo() {
+  var x = document.getElementById("todoDiv");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
 
   //tallenna prosessi manuaalisti
   document.getElementById('tallennaProsessi').addEventListener('click', function () {
@@ -42,7 +64,6 @@ var fillSpeed = 1;
   };
   tallennaMuuttujat(muuttujat);
 });
-
 
 // Tallentaa muuttujat selaimen välimuistiin
 function tallennaMuuttujat(muuttujat) {
@@ -119,20 +140,23 @@ const tilaVari2 = "black";
 //boolen arvo tilalle
 var tila = null;
 
-
-
-
 // Function to update canvases
 function updateCanvas1() {
   if (isDrawing && fillPercentage1 <= 100) {
-    // Clear canvases
-
-    //printterin tilan vahvistus
-    if (tila === null) {
+    
+    // tarkistetaan onko herja aktiivisenam eikä päivitetä tilariviä jos on
+    if (!herjaActive && tila !== "Taynna" && tila !== "stop") {
+      document.getElementById("tila").innerHTML = "Painetaan duunia tyrät rytkyen!";
+      let tilaVari = document.getElementById("tila");
+      tilaVari.style.color = "green";
+    }
+    
+   /* if (tila === null) {
       document.getElementById("tila").innerHTML = "Painetaan duunia tyrät rytkyen!";
       var tilaVari = document.getElementById("tila");
       tilaVari.style.color = "green";
-    }
+    }*/
+
     fillingCtx1.clearRect(0, 0, fillingCanvas1.width, fillingCanvas1.height);
     fillingCtx1.fillStyle = "white";
     fillingCtx1.fillRect(0, 0, fillingCanvas1.width, fillingCanvas1.height);
@@ -189,7 +213,13 @@ function updateCanvas2() {
   //let fillSpeed = 10;
   console.log(fillPercentage2, fillSpeed);
   if (isDrawing && fillPercentage2 <= 100) {
-    // Clear canvases
+    
+    // tarkistetaan onko herja aktiivisenam eikä päivitetä tilariviä jos on
+    if (!herjaActive && tila !== "Taynna" && tila !== "stop") {
+      document.getElementById("tila").innerHTML = "Painetaan duunia tyrät rytkyen!";
+      let tilaVari = document.getElementById("tila");
+      tilaVari.style.color = "green";
+    }
 
     fillingCtx2.clearRect(0, 0, fillingCanvas2.width, fillingCanvas2.height);
     fillingCtx2.fillStyle = "white";
@@ -424,6 +454,57 @@ document.getElementById('toiletButton').addEventListener('click', function () {
   }
 });
 
+let herjaTimeout;
+let herjaActive = false;  // This flag will track whether herja is active or not
+
+
+function herja(herja1, herja2, tilaVari1, tilaVari2) {
+  let x = document.getElementById("tila");
+  let tilaVari = document.getElementById("tila");
+
+  // Set herjaActive flag to true
+  herjaActive = true;
+
+  // If 'tila' is 'Taynna' or 'stop', show message and return
+  if (tila === "Taynna" || tila === "stop") {
+    x.innerHTML = "Binit täynnä, ei voi käynnistää!";
+    tilaVari.style.color = "orange";
+    herjaActive = false;  // Reset herjaActive when done
+    return;
+  }
+
+  // Display the initial warning message
+  x.innerHTML = herja1;
+  tilaVari.style.color = tilaVari1;
+
+  // Clear any existing timeout
+  if (herjaTimeout) {
+    clearTimeout(herjaTimeout);
+  }
+
+  // Set a new timeout to update the message after 2 seconds
+  herjaTimeout = setTimeout(function () {
+    if (tila === "WC") {
+      x.innerHTML = herjaWC3;
+      tilaVari.style.color = "brown";
+    } else if (tila === "ruoka") {
+      x.innerHTML = herjaRuoka3;
+      tilaVari.style.color = "blue";
+    } else if (tila === "tupakki") {
+      x.innerHTML = herjaTupakki2;
+      tilaVari.style.color = "red";
+    } else {
+      x.innerHTML = herja2;
+      tilaVari.style.color = tilaVari2;
+    }
+
+    // Once the timeout completes, reset herjaActive
+    herjaActive = false;
+  }, 2000);
+}
+
+
+/*
 function herja(herja1, herja2, tilaVari1, tilaVari2) {
   if (tila === "Taynna") {
     let x = document.getElementById("tila");
@@ -442,7 +523,7 @@ function herja(herja1, herja2, tilaVari1, tilaVari2) {
     var tilaVari = document.getElementById("tila");
     tilaVari.style.color = tilaVari1;
     let x = document.getElementById("tila");
-    setTimeout(function () {
+    herjaTimeout = setTimeout(function () {
       if (tila === "WC") {
         x.innerHTML = herjaWC3;
         tilaVari.style.color = "brown";
@@ -465,6 +546,7 @@ function herja(herja1, herja2, tilaVari1, tilaVari2) {
       }
 
     }, 2000);
+    clearTimeout(herjaTimeout);
   } else {
     document.getElementById("tila").innerHTML = "Binit täynnä, tyhjennä!";
     var tilaVari = document.getElementById("tila");
@@ -472,7 +554,7 @@ function herja(herja1, herja2, tilaVari1, tilaVari2) {
     console.log(tila);
   }
 }
-
+*/
 
 //move button
 

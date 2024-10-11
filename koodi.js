@@ -50,6 +50,34 @@ function todo() {
   }
 }
 
+//statistiikat
+function stats() {
+  var x = document.getElementById("stats");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+
+//päivitetään statsit sekunnin välein
+function updateSpan() {
+  document.getElementById('statTulosteet').innerHTML = "tulostettu: " + tulosteet;
+  document.getElementById('statPalkka').innerHTML = "rahaa: " + palkka.toFixed(2) + " mk";
+  document.getElementById('statPalkkamuoto').innerHTML = "palkkamuoto: " + palkkamuoto;
+  document.getElementById('statRuokatauko').innerHTML = "ruokataukoja: " + ruokatauko;
+  document.getElementById('statVessatauko').innerHTML = "vessataukoja: " + vessatauko;
+  document.getElementById('statTupakkatauko').innerHTML = "tupakkataukoja: " + tupakkatauko;
+  document.getElementById('statCount').innerHTML = "count: " + count;
+  document.getElementById('statTulostusSkalaari').innerHTML = "tulostusSkalaari: " + tulostusSkalaari;
+  document.getElementById('statTila').innerHTML = "tila: " + tila;
+  document.getElementById('statFill1').innerHTML = "fill1: " + fill1;
+  document.getElementById('statFill2').innerHTML = "fill2: " + fill2;
+}
+
+// Call the update function every 1 second (1000 milliseconds)
+setInterval(updateSpan, 1000);
+
   //tallenna prosessi manuaalisti
   document.getElementById('tallennaProsessi').addEventListener('click', function () {
   //window.addEventListener('beforeunload', function() {

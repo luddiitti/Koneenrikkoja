@@ -17,8 +17,7 @@
 <body>
   <div class="w3-container">
     <header>
-      <h2>Tulostusoperaattori v0.29</h2>
-
+      <h2>Tulostusoperaattori v0.30</h2>
     </header>
     <div id="palkkaLuokka">Palkkamuoto: urakka</div>
     <div id="hinnasto">Hinnasto: ruoka 0,50 mk, tupakki 0,10 mk/kpl</div>
@@ -47,7 +46,7 @@
 <button id="lopetaPaiva">Lopeta työnteko</button>
 <button id="tallennaProsessi">Tallenna toteuma</button>
 <br><br>
-<button onclick="ohje()">Ohje</button> <button onclick="todo()">Tietoja</button>
+<button onclick="ohje()">Ohje</button> <button onclick="todo()">Tietoja</button> <button onclick="stats()">Tilastot</button>
 
 <div id="ohjeDiv">
 <p>Käynnistä tulostin: aloita työt tai lopeta tauko.<br>
@@ -58,7 +57,7 @@ Tallenna toteuma: tallenna tilanne selaimen välimuistiin.</p>
 </div><br><br>
 
 <div id="todoDiv">
-      <small>#herjailmoitus korjattu -> 2 sek.</small><br>
+      <small>#statistiikat lisätty </small><br>
       <small>ToDo <br>
         <ol>
           <li>- palkkamuoto: urakka, kk-palkka, h-palkka...</li>
@@ -66,9 +65,29 @@ Tallenna toteuma: tallenna tilanne selaimen välimuistiin.</p>
           <li>- kuorituskone(et)</li>
           <li>- THE BOSS</li>
           <li>- useampi tulostin</li>
-          <li>- saikku, päiväkaljat statistiikat, yms...</li>
+          <li>- saikku, päiväkaljat, yms...</li>
         </ol>  
-      </small></div><br><br>
+      </small>
+</div>
+
+<div id="stats">
+  <h3>Tilastot</h3>
+    <ol>
+      <li><span id="statTulosteet"></span></li>
+      <li><span id="statPalkka"></span></li>
+      <li><span id="statPalkkamuoto"></span></li>
+      <li><span id="statRuokatauko"></span></li>
+      <li><span id="statVessatauko"></span></li>
+      <li><span id="statTupakkatauko"></span></li>
+      <li><span id="statCount"></span></li>
+      <li><span id="statTulostusSkalaari"></span></li>
+      <li><span id="statTila"></span></li>
+      <li><span id="statFill1"></span></li>
+      <li><span id="statFill2"></span></li>
+    </ol>  
+  </small>
+</div><br><br>
+
 <footer><div>&copy; luddiitti, Pentti Liikanen 2024</div></footer>
 </div>
 </body>

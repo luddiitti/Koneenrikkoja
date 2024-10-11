@@ -148,7 +148,7 @@ document.getElementById('counter').innerText = ladatutMuuttujat.muuttuja6;
 
 //tilamuuttujat
 const herjaWC1 = "Ei vielä voi olla hätä!";
-const herjaWC2 = "Tarviitko sakset?";
+const herjaWC2 = "Tarviitko imodiumia?";
 const herjaWC3 = "Vessassa, trallallaa...";
 const herjaRuoka1 = "Ei vielä voi olla nälkä!";
 const herjaRuoka2 = "Yksi ruokatauko päivässä!";
@@ -161,7 +161,7 @@ const herjaBinit1 = "Tyhjennetään binit ja täytetään paperilokerot!";
 const uusiAlku = "Käynnistä tulostin!";
 const herjaBinit2 = "Ei binit oo vielä täynnä, senkin jannu!";
 const tyoTilaAktiivi = "Painetaan duunia tyrät rytkyen!";
-const binitTaynna = "Binit on täynnä, tartteis poistaa tulosteet!"
+const binittaynna = "Binit on täynnä, tartteis poistaa tulosteet!"
 const tilaVari1 = "black";
 const tilaVari2 = "black";
 
@@ -173,7 +173,7 @@ function updateCanvas1() {
   if (isDrawing && fillPercentage1 <= 100) {
     
     // tarkistetaan onko herja aktiivisenam eikä päivitetä tilariviä jos on
-    if (!herjaActive && tila !== "Taynna" && tila !== "stop") {
+    if (!herjaActive && tila !== "taynna" && tila !== "stop") {
       document.getElementById("tila").innerHTML = "Painetaan duunia tyrät rytkyen!";
       let tilaVari = document.getElementById("tila");
       tilaVari.style.color = "green";
@@ -243,7 +243,7 @@ function updateCanvas2() {
   if (isDrawing && fillPercentage2 <= 100) {
     
     // tarkistetaan onko herja aktiivisenam eikä päivitetä tilariviä jos on
-    if (!herjaActive && tila !== "Taynna" && tila !== "stop") {
+    if (!herjaActive && tila !== "taynna" && tila !== "stop") {
       document.getElementById("tila").innerHTML = "Painetaan duunia tyrät rytkyen!";
       let tilaVari = document.getElementById("tila");
       tilaVari.style.color = "green";
@@ -274,8 +274,8 @@ function updateCanvas2() {
     if (fillPercentage2 >= 101) {
       fill2 = true;
       isDrawing = false;
-      tila = "Taynna";
-      document.getElementById("tila").innerHTML = binitTaynna;
+      tila = "taynna";
+      document.getElementById("tila").innerHTML = binittaynna;
       var tilaVari = document.getElementById("tila");
       tilaVari.style.color = "orange";
       tilavalo(tila);
@@ -301,19 +301,19 @@ var count = 0;
 var sekunnitId; // Global variable to hold the interval ID for secons worked
 document.getElementById('startButton').addEventListener('click', function () {
 
-  if (tila === "Taynna") {
-    herja("Ei voi startata, binit pitäisi tyhjentää!", binitTaynna, "red", "orange");
-    tila = "Taynna";
+  if (tila === "taynna") {
+    herja("Ei voi startata, binit pitäisi tyhjentää!", binittaynna, "red", "orange");
+    tila = "taynna";
     tilavalo(tila);
   }
 
   if (fill1 === true && fill2 === true && tila === "stop") {
-    herja("Ei voi startata, binit pitäisi tyhjentää!", binitTaynna, "red", "orange");
-    tila = "Taynna";
+    herja("Ei voi startata, binit pitäisi tyhjentää!", binittaynna, "red", "orange");
+    tila = "taynna";
     tilavalo(tila);
   }
 
-  if (isDrawing === false && tila != "Taynna") {
+  if (isDrawing === false && tila != "taynna") {
     tila = null;
     tilavalo(tila);
     isDrawing = true;
@@ -433,9 +433,9 @@ document.getElementById('lunchButton').addEventListener('click', function () {
 
 // Pause button event listener WC
 document.getElementById('toiletButton').addEventListener('click', function () {
-  if (fill1 === false && fill2 === false && isDrawing == true) {
+  /*if (fill1 === false && fill2 === false && isDrawing == true) {
     //alert("Ei vielä voi olla hätä!")
-    herja(herjaWC1, tyoTilaAktiivi, "red", "green");
+    herja(herjaWC1, tyoTilaAktiivi, "red", "green");*/
     /*document.getElementById("tila").innerHTML = "Ei vielä voi olla hätä!";
       var tilaVari = document.getElementById("tila");
       tilaVari.style.color = "red";
@@ -444,7 +444,7 @@ document.getElementById('toiletButton').addEventListener('click', function () {
         x.innerHTML = "Painetaan duunia tyrät rytkyen!";
         tilaVari.style.color = "green";
       }, 2000);*/
-  } else {
+   //} else {
 
     if (isDrawing == true && vessatauko <= 2) {
       isDrawing = false;
@@ -456,8 +456,15 @@ document.getElementById('toiletButton').addEventListener('click', function () {
       tilavalo(tila);
     }
 
-    if (vessatauko >= 3) {
-      //alert("Tarviitko sakset?");
+    if (isDrawing == true && vessatauko >= 3) {
+      //alert("Tarviitko imodiumia?");
+      isDrawing = false;
+      vessatauko += 1;
+      document.getElementById("tila").innerHTML = "Vessassa, trallallaa...";
+      var tilaVari = document.getElementById("tila");
+      tilaVari.style.color = "brown";
+      tila = "WC";
+      tilavalo(tila);
       herja(herjaWC2, tyoTilaAktiivi, "red", "green");
       /*document.getElementById("tila").innerHTML = herjaWC2 ;
       var tilaVari = document.getElementById("tila");
@@ -468,7 +475,7 @@ document.getElementById('toiletButton').addEventListener('click', function () {
         tilaVari.style.color = "green";
       }, 2000);*/
 
-      //console.log(vessatauko);
+      console.log("vessatauko 2");
 
       //} else {
       //    isDrawing = true;
@@ -479,7 +486,7 @@ document.getElementById('toiletButton').addEventListener('click', function () {
       herja(herjaWC3, tyoTilaAktiivi, "red", "green");
       //alert("Nyt ei ehdi vessaan, kone käyntiin!")
     }
-  }
+  //}
 });
 
 let herjaTimeout;
@@ -493,8 +500,8 @@ function herja(herja1, herja2, tilaVari1, tilaVari2) {
   // Set herjaActive flag to true
   herjaActive = true;
 
-  // If 'tila' is 'Taynna' or 'stop', show message and return
-  if (tila === "Taynna" || tila === "stop") {
+  // If 'tila' is 'taynna' or 'stop', show message and return
+  if (tila === "taynna" || tila === "stop") {
     x.innerHTML = "Binit täynnä, ei voi käynnistää!";
     tilaVari.style.color = "orange";
     herjaActive = false;  // Reset herjaActive when done
@@ -534,7 +541,7 @@ function herja(herja1, herja2, tilaVari1, tilaVari2) {
 
 /*
 function herja(herja1, herja2, tilaVari1, tilaVari2) {
-  if (tila === "Taynna") {
+  if (tila === "taynna") {
     let x = document.getElementById("tila");
     x.innerHTML = "Binit täynnä, ei voi käynnistää!";
     x.style.color = "orange";
@@ -546,7 +553,7 @@ function herja(herja1, herja2, tilaVari1, tilaVari2) {
     x.style.color = "orange";
   }
 
-  if (tila != "Taynna") {
+  if (tila != "taynna") {
     document.getElementById("tila").innerHTML = herja1;
     var tilaVari = document.getElementById("tila");
     tilaVari.style.color = tilaVari1;
@@ -650,7 +657,7 @@ function tilavalo(tila) {
     status = "green";
   } else if (tila === "WC" || tila === "ruoka" || tila === "tupakki") {
     status = "orange";
-  } else if (tila === "Taynna") {
+  } else if (tila === "taynna") {
     status = "red";
   } else if (tila === "stop") {
     status = "black";
@@ -669,13 +676,13 @@ function tilavalo(tila) {
 document.getElementById('lopetaPaiva').addEventListener('click', function () {
   //function lopetaPaiva() {
   //alert("lopetaPaiva");
-  if (tila === "Taynna" && fill1 != false && fill2 != false) {
+  if (tila === "taynna" && fill1 != false && fill2 != false) {
     document.getElementById("tila").innerHTML = "Binit täynnä, tyhjennä ensin!";
     var tilaVari = document.getElementById("tila");
     tilaVari.style.color = "red";
   }
 
-  else if (isDrawing == true || tila === "WC" || tila === "ruoka" || tila === "tupakki" || tila != "Taynna") {
+  else if (isDrawing == true || tila === "WC" || tila === "ruoka" || tila === "tupakki" || tila != "taynna") {
     clearInterval(sekunnitId);
     isDrawing = false;
     tila = "stop";

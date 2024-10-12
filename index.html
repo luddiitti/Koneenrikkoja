@@ -17,7 +17,7 @@
 <body>
   <div class="w3-container">
     <header>
-      <h2>Tulostusoperaattori v0.30</h2>
+      <h2>Tulostusoperaattori v0.40</h2>
     </header>
     <div id="palkkaLuokka">Palkkamuoto: urakka</div>
     <div id="hinnasto">Hinnasto: ruoka 0,50 mk, tupakki 0,10 mk/kpl</div>
@@ -35,6 +35,11 @@
   <canvas id="emptyingCanvas1" width="90" height="100"></canvas>
   <canvas id="emptyingCanvas2" width="90" height="100"></canvas>
 </div>
+<div class="slider-container">
+  <label for="mySlider">Nopeus:</label><br>
+  <input type="range" id="mySlider" min="0" max="110" value="1">
+  <span id="sliderValue">1</span>
+</div>
 <br>
 <div id="ball"></div>
 <br>
@@ -46,14 +51,16 @@
 <button id="lopetaPaiva">Lopeta työnteko</button>
 <button id="tallennaProsessi">Tallenna toteuma</button>
 <br><br>
-<button onclick="ohje()">Ohje</button> <button onclick="todo()">Tietoja</button> <button onclick="stats()">Tilastot</button>
+<button onclick="stats('ohjeDiv')">Ohje</button> <button onclick="stats('todoDiv')">Tietoja</button> <button onclick="stats('statsDiv')">Tilastot</button>
 
 <div id="ohjeDiv">
 <p>Käynnistä tulostin: aloita työt tai lopeta tauko.<br>
 Tauko: pidä taukoa, jos ehdit, palkka ei juokse.<br>
 Lisää paperia ja tyhjennä lokerot: kun tulostimen ylälokerot on täynnä.<br>
 Lopeta työnteko: pysäytä tulostin.<br>
-Tallenna toteuma: tallenna tilanne selaimen välimuistiin.</p>
+Tallenna toteuma: tallenna tilanne selaimen välimuistiin.<br>
+Tilastot: näytä muuttujien arvoja.</p>
+
 </div>
 
 <div id="todoDiv">
@@ -70,17 +77,20 @@ Tallenna toteuma: tallenna tilanne selaimen välimuistiin.</p>
       </small>
 </div>
 
-<div id="stats">
+<div id="statsDiv">
   <h3>Tilastot</h3>
     <ol>
       <li><span id="statTulosteet"></span></li>
       <li><span id="statPalkka"></span></li>
+      <li><span id="statTyoaika"></span></li>
       <li><span id="statPalkkamuoto"></span></li>
       <li><span id="statRuokatauko"></span></li>
       <li><span id="statVessatauko"></span></li>
       <li><span id="statTupakkatauko"></span></li>
       <li><span id="statCount"></span></li>
       <li><span id="statTulostusSkalaari"></span></li>
+      <li><span id="statFillspeed"></span></li>
+      <li><span id="statAnimationSpeed"></span></li>
       <li><span id="statTila"></span></li>
       <li><span id="statFill1"></span></li>
       <li><span id="statFill2"></span></li>

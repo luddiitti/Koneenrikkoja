@@ -109,6 +109,12 @@ function updateSpan() {
   statTila.innerHTML = "tila: " + tila;
   statFill1.innerHTML = "fill1: " + fill1;
   statFill2.innerHTML = "fill2: " + fill2;
+
+  if (isDrawing === true && tila != "taynna") {
+    document.getElementById("tila").innerHTML = "Printteri tulostaa nopeudella " + fillSpeed;
+    var tilaVari = document.getElementById("tila");
+    tilaVari.style.color = "green";
+  }
 }
 
 // Call updateSpan every 1 second
@@ -246,10 +252,6 @@ let animationInterval = 16; // Roughly 60 updates per second (16ms)
 
 function updateCanvas1() {
   if (isDrawing && fillPercentage1 <= 100) {
-    
-    document.getElementById("tila").innerHTML = "Printteri tulostaa nopeudella " + fillSpeed;
-    var tilaVari = document.getElementById("tila");
-    tilaVari.style.color = "green";
 
     // Clear and fill logic
     fillingCtx1.clearRect(0, 0, fillingCanvas1.width, fillingCanvas1.height);
@@ -298,10 +300,6 @@ function updateCanvas1() {
 function updateCanvas2() {
   if (isDrawing && fillPercentage2 <= 100) {
     
-    document.getElementById("tila").innerHTML = "Printteri tulostaa nopeudella " + fillSpeed;
-    var tilaVari = document.getElementById("tila");
-    tilaVari.style.color = "green";
-
     // Clear and fill logic
     fillingCtx2.clearRect(0, 0, fillingCanvas2.width, fillingCanvas2.height);
     fillingCtx2.fillStyle = "white";
@@ -374,9 +372,15 @@ document.getElementById('startButton').addEventListener('click', function () {
     tila = "kaynnissa";
     tilavalo(tila);
     isDrawing = true;
-    document.getElementById("tila").innerHTML = "Painetaan duunia tyrät rytkyen!";
+
+    document.getElementById("tila").innerHTML = "Printteri tulostaa nopeudella " + fillSpeed;
     var tilaVari = document.getElementById("tila");
     tilaVari.style.color = "green";
+
+
+    /*document.getElementById("tila").innerHTML = "Painetaan duunia tyrät rytkyen!";
+    var tilaVari = document.getElementById("tila");
+    tilaVari.style.color = "green";*/
     if (fill1 === true) {
       //setTimeout(updateCanvas2, 1000);
       updateCanvas2();

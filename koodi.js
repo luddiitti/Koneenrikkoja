@@ -256,6 +256,11 @@ function updateCanvas1() {
     emptyingCtx1.fillStyle = "lightgray";
     emptyingCtx1.fillRect(0, 0, emptyingCanvas1.width, emptyingCanvas1.height);
 
+
+    emptyingCtx2.clearRect(0, 0, emptyingCanvas2.width, emptyingCanvas2.height);
+    emptyingCtx2.fillStyle = "lightgray";
+    emptyingCtx2.fillRect(0, 0, emptyingCanvas2.width, emptyingCanvas2.height);
+
     // Calculate fill height
     var fillHeight1 = (fillingCanvas1.height / 100) * fillPercentage1;
     

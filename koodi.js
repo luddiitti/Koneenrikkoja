@@ -247,6 +247,10 @@ let animationInterval = 16; // Roughly 60 updates per second (16ms)
 function updateCanvas1() {
   if (isDrawing && fillPercentage1 <= 100) {
     
+    document.getElementById("tila").innerHTML = "Printteri tulostaa nopeudella " + fillSpeed;
+    var tilaVari = document.getElementById("tila");
+    tilaVari.style.color = "green";
+
     // Clear and fill logic
     fillingCtx1.clearRect(0, 0, fillingCanvas1.width, fillingCanvas1.height);
     fillingCtx1.fillStyle = "white";
@@ -294,6 +298,10 @@ function updateCanvas1() {
 function updateCanvas2() {
   if (isDrawing && fillPercentage2 <= 100) {
     
+    document.getElementById("tila").innerHTML = "Printteri tulostaa nopeudella " + fillSpeed;
+    var tilaVari = document.getElementById("tila");
+    tilaVari.style.color = "green";
+
     // Clear and fill logic
     fillingCtx2.clearRect(0, 0, fillingCanvas2.width, fillingCanvas2.height);
     fillingCtx2.fillStyle = "white";
@@ -662,6 +670,7 @@ document.getElementById('moveButton').addEventListener('click', function () {
     document.getElementById("tila").innerHTML = "Tyhjennetään binit ja täytetään paperilokerot!";
     let tilaVari = document.getElementById("tila");
     tilaVari.style.color = "orange";
+    
     setTimeout(function () {
       document.getElementById("tila").innerHTML = uusiAlku;
       var tilaVari = document.getElementById("tila");

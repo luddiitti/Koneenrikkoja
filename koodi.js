@@ -1,4 +1,20 @@
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(reg => {
+    reg.onupdatefound = () => {
+      const newWorker = reg.installing;
+      newWorker.onstatechange = () => {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          // New content is available, inform the user
+          if (confirm("A new version is available. Reload?")) {
+            window.location.reload();
+          }
+        }
+      };
+    };
+  });
+}
+
 // Get canvas elements and contexts
 var fillingCanvas1 = document.getElementById('fillingCanvas1');
 var fillingCtx1 = fillingCanvas1.getContext('2d');

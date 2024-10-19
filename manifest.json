@@ -1,7 +1,7 @@
 {
 "name": "Koneenrikkoja",
 "short_name": "Koneenrikkoja",
-"start_url": "/Koneenrikkoja/index.html",
+"start_url": "../Koneenrikkoja/index.html",
 "display": "standalone",
 "description": "Tulostusoperaattori js-peli",
 "lang": " Suomi (Finnish)",

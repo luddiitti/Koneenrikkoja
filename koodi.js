@@ -109,7 +109,7 @@ function updateSpan() {
   statTila.innerHTML = "tila: " + tila;
   statFill1.innerHTML = "fill1: " + fill1;
   statFill2.innerHTML = "fill2: " + fill2;
-
+  
   if (isDrawing === true && tila != "taynna" && herjaTimeout === null) {
     document.getElementById("tila").innerHTML = "Printteri tulostaa nopeudella " + fillSpeed;
     var tilaVari = document.getElementById("tila");
@@ -152,7 +152,7 @@ slider.addEventListener("input", function() {
   tulostusSkalaari = 2 * variableValue;
   animationSpeed = 0.1 * variableValue; // You can use this if needed for other purposes
 
-  console.log("Current value of fillSpeed:", fillSpeed); // Log the value if needed
+  //console.log("Current value of fillSpeed:", fillSpeed); // Log the value if needed
 });
 
 // Call the update function every 1 second (1000 milliseconds)
@@ -467,7 +467,7 @@ document.getElementById('toiletButton').addEventListener('click', function () {
  
 });
 
-let herjaTimeout; // Global variable for timeout
+let herjaTimeout = null; // Global variable for timeout
 
 function herja(herja1, herja2, tilaVari1, tilaVari2) {
   let x = document.getElementById("tila");

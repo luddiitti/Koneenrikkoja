@@ -18,7 +18,7 @@
 <body>
   <div class="w3-container">
     <header>
-      <h2>Tulostusoperaattori v0.42</h2>
+      <h2>Tulostusoperaattori v0.43</h2>
     </header>
     <div id="palkkaLuokka">Palkkamuoto: urakka</div>
     <div id="hinnasto">Hinnasto: ruoka 0,50 mk, tupakki 0,10 mk/kpl</div>
@@ -49,8 +49,9 @@
 <button id="pauseButton">Tupakkatauko</button>
 <button id="lunchButton">Ruokatauko</button>
 <button id="toiletButton">Vessatauko</button><br>
-<button id="lopetaPaiva">Lopeta työnteko</button>
-<button id="tallennaProsessi">Tallenna toteuma</button>
+<button id="pysaytaTulostus">Pysäytä tulostin</button>
+<button id="lopetaPaiva">Lopeta työnteko ja tallenna toteuma</button>
+<!--<button id="tallennaProsessi">Tallenna toteuma</button>-->
 <br><br>
 <button onclick="stats('ohjeDiv')">Ohje</button> <button onclick="stats('todoDiv')">Tietoja</button> <button onclick="stats('statsDiv')">Tilastot</button>
 
@@ -58,8 +59,8 @@
 <p>Käynnistä tulostin: aloita työt tai lopeta tauko.<br>
 Tauko: pidä taukoa, jos ehdit, palkka ei juokse.<br>
 Lisää paperia ja tyhjennä lokerot: kun tulostimen ylälokerot on täynnä.<br>
-Lopeta työnteko: pysäytä tulostin.<br>
-Tallenna toteuma: tallenna tilanne selaimen välimuistiin.<br>
+Pysäytä tulostin: pysäyttää tulostimen.<br>
+Lopeta työnteko ja tallenna toteuma: poistaa tulosteet lokeroista ja tallentaa tilanteen selaimen välimuistiin.<br>
 Tilastot: näytä muuttujien arvoja.</p>
 
 </div>

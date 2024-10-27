@@ -95,7 +95,7 @@ const statFill2 = document.getElementById('statFill2');
 
 // Update stats every second
 function updateSpan() {
-  statTulosteet.innerHTML = "tulostettu: " + tulosteet + " kpl A4-simplex " + '<s>' + "ja 0 kpl A4-duplex" + '</s>';
+  statTulosteet.innerHTML = "tulostettu: " + tulosteet.toFixed(0) + " kpl A4-simplex " + '<s>' + "ja 0 kpl A4-duplex" + '</s>';
   statPalkka.innerHTML = "rahaa: " + palkka.toFixed(2) + " mk";
   statTyoaika.innerHTML = "toteutunut työaika: " + formatTime(count);
   statPalkkamuoto.innerHTML = "palkkamuoto: " + palkkamuoto;
@@ -110,7 +110,7 @@ function updateSpan() {
   statFill1.innerHTML = "fill1: " + fill1;
   statFill2.innerHTML = "fill2: " + fill2;
 
-  if (isDrawing === true && tila != "taynna") {
+  if (isDrawing === true && tila != "taynna" && herjaTimeout === null) {
     document.getElementById("tila").innerHTML = "Printteri tulostaa nopeudella " + fillSpeed;
     var tilaVari = document.getElementById("tila");
     tilaVari.style.color = "green";
@@ -158,20 +158,7 @@ slider.addEventListener("input", function() {
 // Call the update function every 1 second (1000 milliseconds)
 setInterval(updateSpan, 1000);
 
-  //tallenna prosessi manuaalisti
-  document.getElementById('tallennaProsessi').addEventListener('click', function () {
-  //window.addEventListener('beforeunload', function() {
-  const muuttujat = {
-      muuttuja1: tulosteet,
-      muuttuja2: ruokatauko,
-      muuttuja3: vessatauko,
-      muuttuja4: tupakkatauko,
-      muuttuja5: palkka,
-      muuttuja6: count
-      //muuttujax: { avain: 'arvo', numero: 456 }
-  };
-  tallennaMuuttujat(muuttujat);
-});
+
 
 // Tallentaa muuttujat selaimen välimuistiin
 function tallennaMuuttujat(muuttujat) {
@@ -215,7 +202,7 @@ tupakkatauko = ladatutMuuttujat.muuttuja4;
 palkka = ladatutMuuttujat.muuttuja5;
 count = ladatutMuuttujat.muuttuja6;
 
-document.getElementById('kokonaistulosteet').innerText = ladatutMuuttujat.muuttuja1;
+document.getElementById('kokonaistulosteet').innerText = ladatutMuuttujat.muuttuja1.toFixed(0);
 document.getElementById('palkka').innerText = ladatutMuuttujat.muuttuja5.toFixed(2) + " mk";
 document.getElementById('counter').innerText = ladatutMuuttujat.muuttuja6;
 }
@@ -240,7 +227,7 @@ const herjaTupakki3 = "Ei taukoja nyt laiskuri, kone käyntiin!";
 const herjaBinit1 = "Tyhjennetään binit ja täytetään paperilokerot!";
 const uusiAlku = "Käynnistä tulostin!";
 const herjaBinit2 = "Ei binit oo vielä täynnä, senkin jannu!";
-const tyoTilaAktiivi = "Painetaan duunia tyrät rytkyen!";
+const tyoTilaAktiivi = "Printteri tulostaa nopeudella " + fillSpeed;
 const binittaynna = "Binit on täynnä, tartteis poistaa tulosteet!"
 const tilaVari1 = "black";
 const tilaVari2 = "black";
@@ -262,7 +249,6 @@ function updateCanvas1() {
     emptyingCtx1.fillStyle = "lightgray";
     emptyingCtx1.fillRect(0, 0, emptyingCanvas1.width, emptyingCanvas1.height);
 
-
     emptyingCtx2.clearRect(0, 0, emptyingCanvas2.width, emptyingCanvas2.height);
     emptyingCtx2.fillStyle = "lightgray";
     emptyingCtx2.fillRect(0, 0, emptyingCanvas2.width, emptyingCanvas2.height);
@@ -279,16 +265,17 @@ function updateCanvas1() {
     emptyingCtx1.fillRect(0, 0, emptyingCanvas1.width, fillHeight1);
 
     // Increment salary (lixa)
-    palkka += palkkaIncrement;
-
+    palkka += (palkkaIncrement * fillSpeed);
+    document.getElementById("palkka").innerHTML = palkka.toFixed(2) + " mk";
+    
     // Update fill percentage based on fillSpeed and update frequency
     fillPercentage1 += (fillSpeed / 60); // Dividing by 60 since we're updating 60 times per second
 
     if (fillPercentage1 >= 100) {
       fill1 = true;
       tulosteet += 2500; // Add 2500 printed pages
-      document.getElementById("kokonaistulosteet").innerHTML = tulosteet;
-      document.getElementById("palkka").innerHTML = palkka.toFixed(2) + " mk";
+      document.getElementById("kokonaistulosteet").innerHTML = tulosteet.toFixed(0);
+
       setTimeout(updateCanvas2, 1500); // Delay to start filling the second canvas
     }
 
@@ -322,17 +309,16 @@ function updateCanvas2() {
 
  
     // Increment salary (lixa)
-    palkka += palkkaIncrement;
-
+    palkka += (palkkaIncrement * fillSpeed);
+    document.getElementById("palkka").innerHTML = palkka.toFixed(2) + " mk";
 
     // Update fill percentage based on fillSpeed and update frequency
     fillPercentage2 += (fillSpeed / 60); // Smoother updates
-
+    
     if (fillPercentage2 >= 100) {
       fill2 = true;
       tulosteet += 2500; // Add 2500 printed pages
-      document.getElementById("kokonaistulosteet").innerHTML = tulosteet;
-      document.getElementById("palkka").innerHTML = palkka.toFixed(2) + " mk";
+      document.getElementById("kokonaistulosteet").innerHTML = tulosteet.toFixed(0);
       isDrawing = false;
       tila = "taynna";
       document.getElementById("tila").innerHTML = binittaynna;
@@ -373,14 +359,11 @@ document.getElementById('startButton').addEventListener('click', function () {
     tilavalo(tila);
     isDrawing = true;
 
+
     document.getElementById("tila").innerHTML = "Printteri tulostaa nopeudella " + fillSpeed;
     var tilaVari = document.getElementById("tila");
     tilaVari.style.color = "green";
 
-
-    /*document.getElementById("tila").innerHTML = "Painetaan duunia tyrät rytkyen!";
-    var tilaVari = document.getElementById("tila");
-    tilaVari.style.color = "green";*/
     if (fill1 === true) {
       //setTimeout(updateCanvas2, 1000);
       updateCanvas2();
@@ -388,9 +371,6 @@ document.getElementById('startButton').addEventListener('click', function () {
       //setTimeout(updateCanvas1, 1000);
       updateCanvas1();
     }
-    /*if (fill1 === false) {
-        updateCanvas1();
-    }*/
     var counterElement = document.getElementById('counter');
     //var count = 0;  // Start the counter at 0
     clearInterval(sekunnitId);
@@ -421,15 +401,8 @@ document.getElementById('pauseButton').addEventListener('click', function () {
       tilaVari.style.color = "red";
       tila = "tupakki";
       tilavalo(tila);
-
-
-      //} else {
-      //    isDrawing = true;
-      //    document.querySelector('#startButton').click();
     }
-
     if (fill1 === true && fill2 === true) {
-      //alert("Ei taukoja nyt laiskuri, kone käyntiin!")
       herja(herjaTupakki3, tyoTilaAktiivi, "red", "green");
     }
   }
@@ -437,75 +410,33 @@ document.getElementById('pauseButton').addEventListener('click', function () {
 
 // Pause button event listener ruoka
 document.getElementById('lunchButton').addEventListener('click', function () {
-  if (tulosteet < 20000 && isDrawing == true) {
-    herja(herjaRuoka1, tyoTilaAktiivi, "red", "green");
-    /*document.getElementById("tila").innerHTML = "Ei vielä voi olla nälkä!";
-    var tilaVari = document.getElementById("tila");
-    tilaVari.style.color = "red";
-    let x = document.getElementById("tila");
-    setTimeout(function () {
-      x.innerHTML = "Painetaan duunia tyrät rytkyen!";
-      tilaVari.style.color = "green";
-    }, 2000);*/
-    //alert("Ei vielä voi olla nälkä!")
-  } else if (ruokatauko >= 1 && isDrawing == true) {
-    herja(herjaRuoka2, tyoTilaAktiivi, "red", "green");
-    /*document.getElementById("tila").innerHTML = "Yksi ruokatauko päivässä!";
-    var tilaVari = document.getElementById("tila");
-    tilaVari.style.color = "red";
-    let x = document.getElementById("tila");
-    setTimeout(function () {
-      x.innerHTML = "Painetaan duunia tyrät rytkyen!";
-      tilaVari.style.color = "green";
-    }, 2000);*/
-
-    //alert("Yksi ruokatauko päivässä!")
+  if (tulosteet < 20000 && isDrawing === true) {
+    herja(herjaRuoka1, tyoTilaAktiivi, "red", "green"); // Message for "not enough prints for lunch break"
+  } else if (ruokatauko >= 1 && isDrawing === true) {
+    herja(herjaRuoka2, tyoTilaAktiivi, "red", "green"); // Message for "only one lunch break allowed per day"
   } else {
-
-    if (isDrawing == true) {
+    if (isDrawing === true) {
+      clearInterval(sekunnitId); // Stop the timer
       isDrawing = false;
       ruokatauko += 1;
       palkka -= 0.50;
-      document.getElementById("tila").innerHTML = herjaRuoka3;
-
+      document.getElementById("tila").innerHTML = herjaRuoka3; // Display lunch message
       var tilaVari = document.getElementById("tila");
       tilaVari.style.color = "blue";
-      tila = "ruoka";
+      tila = "ruoka"; // Update status to 'ruoka'
       tilavalo(tila);
-      //} else {
-      //    isDrawing = true;
-      //    document.querySelector('#startButton').click();
-    }
-
-    if (fill1 === true && fill2 === true && ruokatauko < 1) {
-      //alert("Nyt ei syödä läski, kone käyntiin!")
-      herja(herjaRuoka4, tyoTilaAktiivi, "red", "green");
-      /*document.getElementById("tila").innerHTML = "Nyt ei syödä läski, kone käyntiin!";
-      var tilaVari = document.getElementById("tila");
-      tilaVari.style.color = "red";
-      let x = document.getElementById("tila");
-      setTimeout(function(){
-        x.innerHTML = "Painetaan duunia tyrät rytkyen!";
-        tilaVari.style.color = "green";
-      }, 2000);*/
+      
+      // Set timeout to clear the message
+      setTimeout(function() {
+        document.getElementById("tila").innerHTML = tyoTilaAktiivi;
+        tilaVari.style.color = "green"; // Reset color to active work status
+      }, 2000); // Change duration as needed
     }
   }
 });
 
 // Pause button event listener WC
 document.getElementById('toiletButton').addEventListener('click', function () {
-  /*if (fill1 === false && fill2 === false && isDrawing == true) {
-    //alert("Ei vielä voi olla hätä!")
-    herja(herjaWC1, tyoTilaAktiivi, "red", "green");*/
-    /*document.getElementById("tila").innerHTML = "Ei vielä voi olla hätä!";
-      var tilaVari = document.getElementById("tila");
-      tilaVari.style.color = "red";
-      let x = document.getElementById("tila");
-      setTimeout(function(){
-        x.innerHTML = "Painetaan duunia tyrät rytkyen!";
-        tilaVari.style.color = "green";
-      }, 2000);*/
-   //} else {
 
     if (isDrawing == true && vessatauko <= 2) {
       isDrawing = false;
@@ -527,58 +458,30 @@ document.getElementById('toiletButton').addEventListener('click', function () {
       tila = "WC";
       tilavalo(tila);
       herja(herjaWC2, tyoTilaAktiivi, "red", "green");
-      /*document.getElementById("tila").innerHTML = herjaWC2 ;
-      var tilaVari = document.getElementById("tila");
-      tilaVari.style.color = "red";
-      let x = document.getElementById("tila");
-      setTimeout(function(){
-        x.innerHTML = tyoTilaAktiivi;
-        tilaVari.style.color = "green";
-      }, 2000);*/
-
       console.log("vessatauko 2");
-
-      //} else {
-      //    isDrawing = true;
-      //    document.querySelector('#startButton').click();
     }
 
     if (fill1 === true && fill2 === true) {
       herja(herjaWC3, tyoTilaAktiivi, "red", "green");
-      //alert("Nyt ei ehdi vessaan, kone käyntiin!")
     }
-  //}
+ 
 });
 
-let herjaTimeout;
-let herjaActive = false;  // This flag will track whether herja is active or not
-
+let herjaTimeout; // Global variable for timeout
 
 function herja(herja1, herja2, tilaVari1, tilaVari2) {
   let x = document.getElementById("tila");
   let tilaVari = document.getElementById("tila");
 
-  // Set herjaActive flag to true
-  herjaActive = true;
-
-  // If 'tila' is 'taynna' or 'stop', show message and return
-  if (tila === "taynna" || tila === "stop") {
-    x.innerHTML = "Binit täynnä, ei voi käynnistää!";
-    tilaVari.style.color = "orange";
-    herjaActive = false;  // Reset herjaActive when done
-    return;
-  }
-
-  // Display the initial warning message
-  x.innerHTML = herja1;
-  tilaVari.style.color = tilaVari1;
-
-  // Clear any existing timeout
+  // Clear any existing timeout to prevent overlaps
   if (herjaTimeout) {
     clearTimeout(herjaTimeout);
   }
-
-  // Set a new timeout to update the message after 2 seconds
+  // Display the initial warning message
+  x.innerHTML = herja1;
+  tilaVari.style.color = tilaVari1;
+console.log("herjatimeout " + herjaTimeout);
+  // Set a new timeout to update the message after 1 second
   herjaTimeout = setTimeout(function () {
     if (tila === "WC") {
       x.innerHTML = herjaWC3;
@@ -594,9 +497,9 @@ function herja(herja1, herja2, tilaVari1, tilaVari2) {
       tilaVari.style.color = tilaVari2;
     }
 
-    // Once the timeout completes, reset herjaActive
-    herjaActive = false;
-  }, 2000);
+    // Reset `herjaTimeout` after the timeout completes
+    herjaTimeout = null;
+  }, 1000); // Set to 1 second for the message display duration
 }
 
 
@@ -734,6 +637,31 @@ function tilavalo(tila) {
   }, 500); // Changes color every 500 milliseconds
 };
 
+document.getElementById('pysaytaTulostus').addEventListener('click', function () {
+  //function lopetaPaiva() {
+  //alert("lopetaPaiva");
+  if (tila === "taynna" && fill1 != false && fill2 != false) {
+    document.getElementById("tila").innerHTML = "Binit täynnä, tyhjennä ensin!";
+    var tilaVari = document.getElementById("tila");
+    tilaVari.style.color = "red";
+  }
+
+  else if (isDrawing == true || tila === "WC" || tila === "ruoka" || tila === "tupakki" || tila != "taynna") {
+    clearInterval(sekunnitId);
+    isDrawing = false;
+    tila = "stop";
+    let tilaVari = document.getElementById("tila");
+    tilaVari.style.color = "black";
+    tilavalo(tila);
+
+    //if (tila === stop && fill1 === false && fill2 === false) {
+    //  document.getElementById("tila").innerHTML = "Työnteko on jo lopetettu!";
+    //} else {
+      document.getElementById("tila").innerHTML = "Tulostin on pysätetty!";
+    //}
+    
+  }
+});
 
 document.getElementById('lopetaPaiva').addEventListener('click', function () {
   //function lopetaPaiva() {
@@ -748,9 +676,67 @@ document.getElementById('lopetaPaiva').addEventListener('click', function () {
     clearInterval(sekunnitId);
     isDrawing = false;
     tila = "stop";
+
+    tulosteet += fillPercentage1 * 25 + fillPercentage2 * 25;
+
+    //animaatioprosentit -> 0
+    fillPercentage1 = 0
+    fillPercentage2 = 0
+
+    //täytön boolen arvo -> false
+    fill1 = false;
+    fill2 = false;
+
+    //canvasien nollaus
+    fillingCtx1.clearRect(0, 0, fillingCanvas1.width, fillingCanvas1.height);
+    fillingCtx1.fillStyle = "white";
+    fillingCtx1.fillRect(0, 0, fillingCanvas1.width, fillingCanvas1.height);
+
+    fillingCtx2.clearRect(0, 0, fillingCanvas2.width, fillingCanvas2.height);
+    fillingCtx2.fillStyle = "white";
+    fillingCtx2.fillRect(0, 0, fillingCanvas2.width, fillingCanvas2.height);
+
+    emptyingCtx1.clearRect(0, 0, emptyingCanvas1.width, emptyingCanvas1.height);
+    emptyingCtx1.fillStyle = "lightgray";
+    emptyingCtx1.fillRect(0, 0, emptyingCanvas1.width, emptyingCanvas1.height);
+
+    emptyingCtx2.clearRect(0, 0, emptyingCanvas2.width, emptyingCanvas2.height);
+    emptyingCtx2.fillStyle = "lightgray";
+    emptyingCtx2.fillRect(0, 0, emptyingCanvas2.width, emptyingCanvas2.height);
+
+    //tietojen pävitys
+    document.getElementById("kokonaistulosteet").innerHTML = tulosteet.toFixed(0);
     document.getElementById("tila").innerHTML = "Työnteko lopetettu!";
     let tilaVari = document.getElementById("tila");
     tilaVari.style.color = "black";
     tilavalo(tila);
+
+    //window.addEventListener('beforeunload', function() {
+      const muuttujat = {
+        muuttuja1: tulosteet,
+        muuttuja2: ruokatauko,
+        muuttuja3: vessatauko,
+        muuttuja4: tupakkatauko,
+        muuttuja5: palkka,
+        muuttuja6: count
+        //muuttujax: { avain: 'arvo', numero: 456 }
+    };
+    tallennaMuuttujat(muuttujat);
   }
 });
+
+/*
+  //tallenna prosessi manuaalisti
+  document.getElementById('tallennaProsessi').addEventListener('click', function () {
+    //window.addEventListener('beforeunload', function() {
+    const muuttujat = {
+        muuttuja1: tulosteet,
+        muuttuja2: ruokatauko,
+        muuttuja3: vessatauko,
+        muuttuja4: tupakkatauko,
+        muuttuja5: palkka,
+        muuttuja6: count
+        //muuttujax: { avain: 'arvo', numero: 456 }
+    };
+    tallennaMuuttujat(muuttujat);
+  });*/

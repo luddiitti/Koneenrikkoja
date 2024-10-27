@@ -426,11 +426,11 @@ document.getElementById('lunchButton').addEventListener('click', function () {
       tila = "ruoka"; // Update status to 'ruoka'
       tilavalo(tila);
       
-      // Set timeout to clear the message
+     /* // Set timeout to clear the message
       setTimeout(function() {
         document.getElementById("tila").innerHTML = tyoTilaAktiivi;
         tilaVari.style.color = "green"; // Reset color to active work status
-      }, 2000); // Change duration as needed
+      }, 2000); // Change duration as needed*/
     }
   }
 });
